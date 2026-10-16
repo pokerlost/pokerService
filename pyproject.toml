@@ -29,6 +29,5 @@ python_version = "3.14"
 strict = true
 files = ["src/pokerService"]
 
-
 [tool.uv.sources]
 pypokerlost = { git = "ssh://git@github.com/pokerlost/pypokerlost.git", rev = "8652cc850ccef8a00538ba6ff0b545ff7f3d38af" }
