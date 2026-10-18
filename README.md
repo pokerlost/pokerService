@@ -13,3 +13,16 @@ uv run --locked uvicorn pokerservice.app:create_app --factory --host 127.0.0.1 -
 ```
 
 `GET /` uses `PokerlostResponse[None]`; `GET /getOpenApi` returns the unmodified OpenAPI document. `/health/live` and `/health/ready` are infrastructure probes. Read `SERVICE.md` for this service's data boundary, [architecture](docs/architecture.md) for the foundation lifecycle, and `AGENTS.md` for local work rules. Run `uv run --locked pytest` for the generated technical suite. CI checks source without a secret on PRs; a private SDK build requires a reviewed SHA and an approved, narrowly scoped App installation.
+
+## Tested foundation commands
+
+The shared template owns `Makefile`, `tests/foundation/` and `deploy/chart/`. Project-owned tests,
+settings, scopes and migration history survive updates. `make test-unit` reports isolated
+coverage; `make test` also measures enabled integration before the full 100% gate. Missing owned
+paths remain visible in the report. `make build image test-image` uses the canonical wheel
+container graph and requires the separately approved SDK-only BuildKit secret.
+
+`make chart-check chart` validates/packages the shared chart. `make deploy-local` and
+`make undeploy-local` operate only the explicit disposable Kind contour. External deployment
+requires an approved destination and tested image manifest digest. Private runtime CI requires
+a full reviewed SHA and the SDK-only App approval gate; skipped runtime checks do not pass.
