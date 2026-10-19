@@ -1,18 +1,7 @@
 # Contributing to pokerService
 
-Open a short `type/shortCamelCaseIntent` branch from the actual default branch. Keep each PR focused, review the full diff and outgoing commits, and use a `type(scope): intent` title. Explain purpose, ownership, compatibility, actual checks, privacy, version decision, and rollback. Do not attach secrets or live data.
+Review HTTP paths, operation IDs, environment names and migration effects. Preserve application-owned documents, settings, historical migrations, seed tests and deployment values during Copier updates.
 
-## 🧪 Local checks
+After a fresh render, resolve and commit `uv.lock`. Existing checkouts use `make install` with that lock. Run `make lint`, `make typecheck`, `make test-unit` and `make test`, then `make build`. `make test-image` also tests the installed wheel in the canonical container. Run `make chart-check chart` and test the packaged deployment in a disposable cluster.
 
-On the first render, run `uv lock` and commit `uv.lock`. After that, use the locked commands below; CI requires the committed lockfile.
-
-```bash
-uv lock --check
-uv sync --locked
-uv run --locked ruff check .
-uv run --locked ruff format --check .
-uv run --locked mypy
-uv build
-```
-
-No subject tests are provided by this scaffold. Until real tests exist, status is `notConfigured`; raw `uv run --locked pytest` exits 5. Once tests exist, run that command and treat empty collection as failure. CI, package release, and deployment are separate from a local build. Record this project's decisions in `PROJECT.md`.
+Record actual statement/branch counts, artifact identities and failed or unavailable checks in the PR. A build does not authorize registry publication, release or production deployment.
