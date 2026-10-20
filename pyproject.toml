@@ -15,6 +15,7 @@ dependencies = ["fastapi==0.143.3", "uvicorn>=0.38,<1", "pydantic-settings>=2.12
 
 [dependency-groups]
 dev = [
+    "PyYAML>=6,<7",
     "mypy>=2.3,<3",
     "ruff==0.16.4",
     "packaging>=25,<27",
